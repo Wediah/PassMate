@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Cloudinary\Api\Exception\ApiError;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function storeEvent(Request $request)
+    /**
+     * @throws ApiError
+     */
+    public function storeEvent(Request $request): void
     {
         $validated = $request->validate([
             'name' => 'required|max:255|min:2',
